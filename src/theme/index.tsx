@@ -197,6 +197,7 @@ html {
 
 body {
   min-height: 100vh;
+  background-position: 0 -30vh;
   background-repeat: no-repeat;
   color: #222;
   font-size: 14px;
