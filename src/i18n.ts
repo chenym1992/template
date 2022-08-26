@@ -17,6 +17,6 @@ i18next
     fallbackLng: "en",
     preload: ["en"],
     interpolation: { escapeValue: false },
-  });
+  })
 
 export default i18next;

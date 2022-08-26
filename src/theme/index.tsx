@@ -1,9 +1,12 @@
+import { transparentize } from "polished";
+import { useMemo } from "react";
 import {
   ThemeProvider as StyledComponentsThemeProvider,
   createGlobalStyle,
   css,
   DefaultTheme,
 } from "styled-components";
+import { useIsDarkMode } from "../state/user/hooks";
 import { Colors } from "./styled";
 const MEDIA_WIDTHS = {
   upToExtraSmall: 500,
@@ -33,35 +36,35 @@ export function colors(darkMode: boolean): Colors {
     black,
 
     // text
-    text1: darkMode ? "#FFFFFF" : "#FFFFFF",
-    text2: darkMode ? "#a6a6a6" : "#a6a6a6",
-    text3: darkMode ? "#A7A7A7" : "#A7A7A7",
-    text4: darkMode ? "#D9D9D9" : "#D9D9D9",
-    text5: darkMode ? "#888888" : "#888888",
+    text1: darkMode ? "#FFFFFF" : "#000000",
+    text2: darkMode ? "#C3C5CB" : "#565A69",
+    text3: darkMode ? "#6C7284" : "#888D9B",
+    text4: darkMode ? "#565A69" : "#C3C5CB",
+    text5: darkMode ? "#2C2F36" : "#EDEEF2",
 
     // backgrounds / greys
-    bg1: darkMode ? "#FFFFFF" : "#FFFFFF",
-    bg2: darkMode ? "#F7F8FA" : "#F7F8FA",
-    bg3: darkMode ? "#f2f2f6" : "#f2f2f6",
+    bg1: darkMode ? "#212429" : "#FFFFFF",
+    bg2: darkMode ? "#2C2F36" : "#F7F8FA",
+    bg3: darkMode ? "#40444F" : "#EDEEF2",
     bg4: darkMode ? "#565A69" : "#CED0D9",
     bg5: darkMode ? "#6C7284" : "#888D9B",
 
     //specialty colors
-    modalBG: darkMode ? "rgba(0,0,0,.425)" : "rgba(0,0,0,0.45)",
+    modalBG: darkMode ? "rgba(0,0,0,.425)" : "rgba(0,0,0,0.3)",
     advancedBG: darkMode ? "rgba(0,0,0,0.1)" : "rgba(255,255,255,0.6)",
 
     //primary colors
-    primary1: darkMode ? "#8c8bff" : "#8c8bff",
+    primary1: darkMode ? "#2172E5" : "#2938D0",
     primary2: darkMode ? "#3680E7" : "#3b48cf",
     primary3: darkMode ? "#4D8FEA" : "#555fca",
     primary4: darkMode ? "#376bad70" : "#6870c870",
     primary5: darkMode ? "#153d6f70" : "#787ec570",
 
     // color text
-    primaryText1: darkMode ? "#FFFFFF" : "#FFFFFF",
+    primaryText1: darkMode ? "#6da8ff" : "#2938D0",
 
     // secondary colors
-    secondary1: darkMode ? "#FFFFFF" : "#FFFFFF",
+    secondary1: darkMode ? "#2172E5" : "#3b48cf",
     secondary2: darkMode ? "#17000b26" : "#555fca",
     secondary3: darkMode ? "#17000b26" : "#6870c8",
 
@@ -72,6 +75,10 @@ export function colors(darkMode: boolean): Colors {
     yellow1: "#FFE270",
     yellow2: "#F3841E",
     yellow3: "#fbac29",
+
+    // dont wanna forget these blue yet
+    // blue4: darkMode ? '#153d6f70' : '#C4D9F8',
+    // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
   };
 }
 
@@ -101,13 +108,13 @@ export function theme(darkMode: boolean): DefaultTheme {
     `,
   };
 }
-
 export default function ThemeProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const themeObject = theme(false);
+  const darkMode = useIsDarkMode();
+  const themeObject = useMemo(() => theme(darkMode), [darkMode]);
 
   return (
     <StyledComponentsThemeProvider theme={themeObject}>
@@ -117,75 +124,37 @@ export default function ThemeProvider({
 }
 
 export const FixedGlobalStyle = createGlobalStyle`
-:root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+html, input, textarea, button {
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.018em;
+  font-display: fallback;
+}
+@supports (font-variation-settings: normal) {
+  html, input, textarea, button {
+    font-family: 'Inter var', sans-serif;
+  }
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
+html,
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+* {
+  box-sizing: border-box;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  user-select: none;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+html {
+  font-size: 16px;
+  font-variant: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 `;
 export const ThemedGlobalStyle = createGlobalStyle`
@@ -197,22 +166,15 @@ html {
 
 body {
   min-height: 100vh;
-  background-position: 0 -30vh;
+  /* background-position: 0 -30vh;
   background-repeat: no-repeat;
-  color: #222;
-  font-size: 14px;
-  font-family: PingFang SC,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-  font-variant: tabular-nums;
-  line-height: 1.5;
-  background-color: #fff;
-  font-feature-settings: "tnum","tnum";
   background-image: ${({ theme }) =>
-    `radial-gradient(50% 50% at 50% 50%, ${theme.primary1} 0%, ${theme.bg1} 100%)`};
+    `radial-gradient(50% 50% at 50% 50%, ${theme.primary1} 0%, ${
+      theme.bg1
+    } 100%)`}; */
 }
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+html,body,#root {
+  width: 100%;
+  height: 100%;
 }
 `;

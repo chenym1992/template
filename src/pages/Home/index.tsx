@@ -4,6 +4,13 @@ import styled, { keyframes } from "styled-components";
 import reactLogo from "../../assets/react.svg";
 import { ButtonPrimary } from "../../components/Button";
 
+const Container = styled.div`
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  padding-top: 160px;
+  text-align: center;
+`;
 const logoSpin = keyframes`
   from {
     transform: rotate(0deg);
@@ -34,15 +41,11 @@ const Card = styled.div`
   padding: 2em;
 `;
 
-const Docs = styled.p`
-  color: ${({ theme }) => theme.text5};
-`;
-
 function Home() {
   const [count, setCount] = useState(0);
   const { t } = useTranslation();
   return (
-    <div>
+    <Container>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <Logo src="/vite.svg" alt="Vite logo" />
@@ -60,8 +63,8 @@ function Home() {
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </Card>
-      <Docs>{t("docs")}</Docs>
-    </div>
+      <p>{t("docs")}</p>
+    </Container>
   );
 }
 
