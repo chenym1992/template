@@ -44,7 +44,7 @@ commit 的类型：
 
 ## 项目列表
 
-- ## [react-typescript](https://github.com/chenym1992/template/tree/react-typescript)
+- ## [react-typescript(vite)](https://github.com/chenym1992/template/tree/react-typescript)
 
 
 
