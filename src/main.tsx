@@ -6,8 +6,6 @@ import "./i18n";
 import store from "./state";
 import UserUpdater from "./state/user/updater";
 import { Provider } from "react-redux";
-import { useTranslation } from "react-i18next";
-
 function Updaters() {
   return (
     <>

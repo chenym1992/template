@@ -1,4 +1,3 @@
-import { transparentize } from "polished";
 import { useMemo } from "react";
 import {
   ThemeProvider as StyledComponentsThemeProvider,
