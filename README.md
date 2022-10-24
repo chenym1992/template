@@ -46,5 +46,7 @@ commit 的类型：
 
 - ## [react-typescript(vite)](https://github.com/chenym1992/template/tree/react-typescript)
 
+- ## [vue-typescript(vite)](https://github.com/chenym1992/template/tree/vue-typescript)
+
 
 
