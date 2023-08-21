@@ -3,18 +3,21 @@
 工作中常用的几种框架模板
 
 ---
-### 写在之前  
 
-约定git提交信息按照以下规范，不再利用hooks进行提交信息验证
+### 写在之前
 
-git commit message 规范  
+约定 git 提交信息按照以下规范，不再利用 hooks 进行提交信息验证
+
+git commit message 规范
 
 commit message 就是对你这次的代码提交进行一个简单的说明，好的提交说明可以让人一眼就明白这次代码提交做了什么。
 
 commit message 的格式：
+
 ```md
 <type>(<scope>): <subject>
 <BLANK LINE>
+
 <body>
 <BLANK LINE>
 <footer>
@@ -40,6 +43,7 @@ commit 的类型：
 - ci: 持续集成相关文件修改
 - chore: 其他修改（不在上述类型中的修改）
 - release: 发布新版本
+
 ---
 
 ## 项目列表
@@ -48,5 +52,4 @@ commit 的类型：
 
 - ## [vue-typescript(vite)](https://github.com/chenym1992/template/tree/vue-typescript)
 
-
-
+- ## [react-typescript-pwa(cra)](https://github.com/chenym1992/template/tree/cra-typescript-pwa)
